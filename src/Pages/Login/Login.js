@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import React, { useEffect } from 'react';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import {toast } from 'react-toastify';
 
 const Login = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const [sendPasswordResetEmail, sending, passwordResetError] = useSendPasswordResetEmail(auth);
 
     const [
         signInWithEmailAndPassword,
@@ -31,7 +29,7 @@ const Login = () => {
         if (user || gUser) {
             navigate(from, { replace: true });
         }
-    } ,[user, gUser, from, navigate])
+    }, [user, gUser, from, navigate])
 
 
     if (loading || gLoading) {
@@ -45,11 +43,6 @@ const Login = () => {
         signInWithEmailAndPassword(data.email, data.password);
     };
 
-    const handlePasswordReset = (data) => {
-        console.log(data.email)
-        sendPasswordResetEmail();
-        // toast('Sent Email!')
-    }
 
 
 
@@ -64,7 +57,7 @@ const Login = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input 
+                            <input
                                 type="email"
                                 placeholder="your Email"
                                 className="input input-bordered w-full max-w-xs"
@@ -113,7 +106,6 @@ const Login = () => {
                         {signInError}
                         <input className='btn w-full max-w-xs' value="Login" type="submit" />
                     </form>
-                    <small><p onClick={handlePasswordReset} className='text-red-500'>Forget Password</p></small>
                     <small><p>New to Doctors Portal <Link className='text-primary' to='/signup'>Create new account</Link></p></small>
                     <div className="divider">OR</div>
                     <button onClick={() => signInWithGoogle()} className="btn btn-outline font-bold">Continue With Google</button>
