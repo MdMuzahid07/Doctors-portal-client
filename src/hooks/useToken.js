@@ -8,7 +8,7 @@ const useToken = user =>{
         
         const currentUser = {email: email};
         if(email){
-            fetch(`http://localhost:5000/user/${email}`, {
+            fetch(`https://polar-ridge-14854.herokuapp.com/user/${email}`, {
                 method:'PUT',
                 headers: {
                     'content-type': 'application/json'
@@ -40,7 +40,7 @@ export default useToken;
 //         const email = user?.user?.email;
 //         const currentUser = {email: email};
 //         if(email){
-//             fetch(`http://localhost:5000/user/${email}`, {
+//             fetch(`https://polar-ridge-14854.herokuapp.com/user/${email}`, {
 //                 method:'PUT',
 //                 headers: {
 //                     'content-type': 'application/json'

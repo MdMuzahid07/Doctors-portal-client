@@ -42,9 +42,8 @@ const SignUP = () => {
     const onSubmit = async data => {
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({ displayName: data.name });
-        console.log("update done")
-
     };
+
     return (
         <div className='flex justify-center item-center'>
             <div className="card w-96 bg-base-100 shadow-xl">
